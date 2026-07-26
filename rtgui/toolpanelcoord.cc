@@ -102,6 +102,10 @@ const std::vector<ToolTree> DETAILS_PANEL_TOOLS = {
         .children = {},
     },
     {
+        .id = Tool::NOISE_GRAIN,
+        .children = {},
+    },
+    {
         .id = Tool::DEFRINGE_TOOL,
         .children = {},
     },
@@ -360,6 +364,7 @@ ToolPanelCoordinator::ToolPanelCoordinator (bool batch) : ipc (nullptr), favorit
     defringe            = Gtk::manage (new Defringe ());
     spot                = Gtk::manage (new Spot ());
     dirpyrdenoise       = Gtk::manage (new DirPyrDenoise ());
+    noisegrain          = Gtk::manage (new NoiseGrain ());
     epd                 = Gtk::manage (new EdgePreservingDecompositionUI ());
     sharpening          = Gtk::manage (new Sharpening ());
     localContrast       = Gtk::manage(new LocalContrast());
@@ -652,6 +657,8 @@ std::string ToolPanelCoordinator::getToolName(Tool tool)
             return Spot::TOOL_NAME;
         case Tool::DIR_PYR_DENOISE:
             return DirPyrDenoise::TOOL_NAME;
+        case Tool::NOISE_GRAIN:
+            return NoiseGrain::TOOL_NAME;
         case Tool::EPD:
             return EdgePreservingDecompositionUI::TOOL_NAME;
         case Tool::SHARPENING_TOOL:
@@ -2030,6 +2037,8 @@ FoldableToolPanel *ToolPanelCoordinator::getFoldableToolPanel(Tool tool) const
             return spot;
         case Tool::DIR_PYR_DENOISE:
             return dirpyrdenoise;
+        case Tool::NOISE_GRAIN:
+            return noisegrain;
         case Tool::EPD:
             return epd;
         case Tool::SHARPENING_TOOL:

@@ -45,6 +45,7 @@ set(RT_GUI_TOOL_PANEL_SOURCES
     tools/locallab.cc
     tools/locallabtools.cc
     tools/locallabtools2.cc
+    tools/noisegrain.cc
     tools/pcvignette.cc
     tools/pdsharpening.cc
     tools/perspective.cc

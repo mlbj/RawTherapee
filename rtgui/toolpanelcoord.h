@@ -59,6 +59,7 @@
 #include "tools/lensprofile.h"
 #include "tools/localcontrast.h"
 #include "tools/locallab.h"
+#include "tools/noisegrain.h"
 #include "tools/pcvignette.h"
 #include "tools/pdsharpening.h"
 #include "tools/perspective.h"
@@ -147,6 +148,7 @@ protected:
     Compressgamut* compressgamut;
     ImpulseDenoise* impulsedenoise;
     DirPyrDenoise* dirpyrdenoise;
+    NoiseGrain* noisegrain;
     EdgePreservingDecompositionUI *epd;
     Sharpening* sharpening;
     SharpenEdge* sharpenEdge;
@@ -260,6 +262,7 @@ public:
         COMPRESSGAMUT_TOOL,
         SPOT,
         DIR_PYR_DENOISE,
+        NOISE_GRAIN,
         EPD,
         SHARPENING_TOOL,
         LOCAL_CONTRAST,
