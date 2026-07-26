@@ -444,6 +444,25 @@ struct ImpulseDenoiseParams {
 };
 
 /**
+  * Parameters of the global Grain/Noise tool
+  */
+struct GrainNoiseParams {
+    bool enabled;
+    Glib::ustring method; // "gaussian", "poisson", "film"
+    double strength;
+    bool chroma;
+    int isogr;
+    int strengr;
+    int scalegr;
+    double divgr;
+
+    GrainNoiseParams();
+
+    bool operator ==(const GrainNoiseParams& other) const;
+    bool operator !=(const GrainNoiseParams& other) const;
+};
+
+/**
  * Parameters of the directional pyramid denoising
  */
 struct DirPyrDenoiseParams {
@@ -1429,6 +1448,7 @@ public:
     DefringeParams          defringe;        ///< Defringing parameters
     ImpulseDenoiseParams    impulseDenoise;  ///< Impulse denoising parameters
     DirPyrDenoiseParams     dirpyrDenoise;   ///< Directional Pyramid denoising parameters
+    GrainNoiseParams        grainNoise;      ///< Grain/Noise parameters
     EPDParams               epd;             ///< Edge Preserving Decomposition parameters
     FattalToneMappingParams fattal;          ///< Fattal02 tone mapping
     SHParams                sh;              ///< Shadow/highlight enhancement parameters

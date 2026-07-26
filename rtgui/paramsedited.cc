@@ -501,6 +501,14 @@ void ParamsEdited::set(bool v)
     defringe.huecurve          = v;
     impulseDenoise.enabled     = v;
     impulseDenoise.thresh      = v;
+    grainNoise.enabled         = v;
+    grainNoise.method          = v;
+    grainNoise.strength        = v;
+    grainNoise.chroma          = v;
+    grainNoise.isogr           = v;
+    grainNoise.strengr         = v;
+    grainNoise.scalegr         = v;
+    grainNoise.divgr           = v;
     dirpyrDenoise.enabled      = v;
     dirpyrDenoise.enhance      = v;
 //  dirpyrDenoise.perform      = v;
@@ -1281,6 +1289,15 @@ void ParamsEdited::initFrom(const std::vector<rtengine::procparams::ProcParams>&
 
         impulseDenoise.enabled = impulseDenoise.enabled && p.impulseDenoise.enabled == other.impulseDenoise.enabled;
         impulseDenoise.thresh = impulseDenoise.thresh && p.impulseDenoise.thresh == other.impulseDenoise.thresh;
+
+        grainNoise.enabled = grainNoise.enabled && p.grainNoise.enabled == other.grainNoise.enabled;
+        grainNoise.method = grainNoise.method && p.grainNoise.method == other.grainNoise.method;
+        grainNoise.strength = grainNoise.strength && p.grainNoise.strength == other.grainNoise.strength;
+        grainNoise.chroma = grainNoise.chroma && p.grainNoise.chroma == other.grainNoise.chroma;
+        grainNoise.isogr = grainNoise.isogr && p.grainNoise.isogr == other.grainNoise.isogr;
+        grainNoise.strengr = grainNoise.strengr && p.grainNoise.strengr == other.grainNoise.strengr;
+        grainNoise.scalegr = grainNoise.scalegr && p.grainNoise.scalegr == other.grainNoise.scalegr;
+        grainNoise.divgr = grainNoise.divgr && p.grainNoise.divgr == other.grainNoise.divgr;
 
         dirpyrDenoise.enabled = dirpyrDenoise.enabled && p.dirpyrDenoise.enabled == other.dirpyrDenoise.enabled;
         dirpyrDenoise.enhance = dirpyrDenoise.enhance && p.dirpyrDenoise.enhance == other.dirpyrDenoise.enhance;
@@ -3655,6 +3672,38 @@ void ParamsEdited::combine(rtengine::procparams::ProcParams& toEdit, const rteng
 
     if (impulseDenoise.thresh) {
         toEdit.impulseDenoise.thresh = mods.impulseDenoise.thresh;
+    }
+
+    if (grainNoise.enabled) {
+        toEdit.grainNoise.enabled = mods.grainNoise.enabled;
+    }
+
+    if (grainNoise.method) {
+        toEdit.grainNoise.method = mods.grainNoise.method;
+    }
+
+    if (grainNoise.strength) {
+        toEdit.grainNoise.strength = mods.grainNoise.strength;
+    }
+
+    if (grainNoise.chroma) {
+        toEdit.grainNoise.chroma = mods.grainNoise.chroma;
+    }
+
+    if (grainNoise.isogr) {
+        toEdit.grainNoise.isogr = mods.grainNoise.isogr;
+    }
+
+    if (grainNoise.strengr) {
+        toEdit.grainNoise.strengr = mods.grainNoise.strengr;
+    }
+
+    if (grainNoise.scalegr) {
+        toEdit.grainNoise.scalegr = mods.grainNoise.scalegr;
+    }
+
+    if (grainNoise.divgr) {
+        toEdit.grainNoise.divgr = mods.grainNoise.divgr;
     }
 
     if (dirpyrDenoise.enabled) {

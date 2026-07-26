@@ -1566,6 +1566,36 @@ bool ImpulseDenoiseParams::operator !=(const ImpulseDenoiseParams& other) const
     return !(*this == other);
 }
 
+GrainNoiseParams::GrainNoiseParams() :
+    enabled(false),
+    method("gaussian"),
+    strength(50),
+    chroma(false),
+    isogr(400),
+    strengr(50),
+    scalegr(100),
+    divgr(1.5)
+{
+}
+
+bool GrainNoiseParams::operator ==(const GrainNoiseParams& other) const
+{
+    return
+        enabled == other.enabled
+        && method == other.method
+        && strength == other.strength
+        && chroma == other.chroma
+        && isogr == other.isogr
+        && strengr == other.strengr
+        && scalegr == other.scalegr
+        && divgr == other.divgr;
+}
+
+bool GrainNoiseParams::operator !=(const GrainNoiseParams& other) const
+{
+    return !(*this == other);
+}
+
 DirPyrDenoiseParams::DirPyrDenoiseParams() :
     lcurve{
         FCT_MinMaxCPoints,
@@ -2913,6 +2943,8 @@ void ProcParams::setDefaults()
 
     impulseDenoise = {};
 
+    grainNoise = {};
+
     dirpyrDenoise = {};
 
     epd = {};
@@ -3202,6 +3234,16 @@ int ProcParams::save(const Glib::ustring& fname, const Glib::ustring& fname2, bo
 // Impulse denoise
         saveToKeyfile(!pedited || pedited->impulseDenoise.enabled, "Impulse Denoising", "Enabled", impulseDenoise.enabled, keyFile);
         saveToKeyfile(!pedited || pedited->impulseDenoise.thresh, "Impulse Denoising", "Threshold", impulseDenoise.thresh, keyFile);
+
+// Grain Noise
+        saveToKeyfile(!pedited || pedited->grainNoise.enabled, "Grain Noise", "Enabled", grainNoise.enabled, keyFile);
+        saveToKeyfile(!pedited || pedited->grainNoise.method, "Grain Noise", "Method", grainNoise.method, keyFile);
+        saveToKeyfile(!pedited || pedited->grainNoise.strength, "Grain Noise", "Strength", grainNoise.strength, keyFile);
+        saveToKeyfile(!pedited || pedited->grainNoise.chroma, "Grain Noise", "Chroma", grainNoise.chroma, keyFile);
+        saveToKeyfile(!pedited || pedited->grainNoise.isogr, "Grain Noise", "Isogr", grainNoise.isogr, keyFile);
+        saveToKeyfile(!pedited || pedited->grainNoise.strengr, "Grain Noise", "Strengr", grainNoise.strengr, keyFile);
+        saveToKeyfile(!pedited || pedited->grainNoise.scalegr, "Grain Noise", "Scalegr", grainNoise.scalegr, keyFile);
+        saveToKeyfile(!pedited || pedited->grainNoise.divgr, "Grain Noise", "Divgr", grainNoise.divgr, keyFile);
 
 // Defringe
         saveToKeyfile(!pedited || pedited->defringe.enabled, "Defringing", "Enabled", defringe.enabled, keyFile);
@@ -4246,6 +4288,17 @@ int ProcParams::load(const Glib::ustring& fname, ParamsEdited* pedited)
         if (keyFile.has_group("Impulse Denoising")) {
             assignFromKeyfile(keyFile, "Impulse Denoising", "Enabled", impulseDenoise.enabled, pedited->impulseDenoise.enabled);
             assignFromKeyfile(keyFile, "Impulse Denoising", "Threshold", impulseDenoise.thresh, pedited->impulseDenoise.thresh);
+        }
+
+        if (keyFile.has_group("Grain Noise")) {
+            assignFromKeyfile(keyFile, "Grain Noise", "Enabled", grainNoise.enabled, pedited->grainNoise.enabled);
+            assignFromKeyfile(keyFile, "Grain Noise", "Method", grainNoise.method, pedited->grainNoise.method);
+            assignFromKeyfile(keyFile, "Grain Noise", "Strength", grainNoise.strength, pedited->grainNoise.strength);
+            assignFromKeyfile(keyFile, "Grain Noise", "Chroma", grainNoise.chroma, pedited->grainNoise.chroma);
+            assignFromKeyfile(keyFile, "Grain Noise", "Isogr", grainNoise.isogr, pedited->grainNoise.isogr);
+            assignFromKeyfile(keyFile, "Grain Noise", "Strengr", grainNoise.strengr, pedited->grainNoise.strengr);
+            assignFromKeyfile(keyFile, "Grain Noise", "Scalegr", grainNoise.scalegr, pedited->grainNoise.scalegr);
+            assignFromKeyfile(keyFile, "Grain Noise", "Divgr", grainNoise.divgr, pedited->grainNoise.divgr);
         }
 
         if (keyFile.has_group("Directional Pyramid Denoising")) { //TODO: No longer an accurate description for FT denoise
@@ -5320,6 +5373,7 @@ bool ProcParams::operator ==(const ProcParams& other) const
         && wb == other.wb
         && colorappearance == other.colorappearance
         && impulseDenoise == other.impulseDenoise
+        && grainNoise == other.grainNoise
         && dirpyrDenoise == other.dirpyrDenoise
         && epd == other.epd
         && fattal == other.fattal

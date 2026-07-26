@@ -1177,6 +1177,14 @@ enum ProcEventCode {
     Evlocallabsigjz12 = 1147,
     Evlocallabsigq12 = 1148,
     Evlocallablogcie = 1149,
+    EvGrainNoiseEnabled = 1150,
+    EvGrainNoiseMethod = 1151,
+    EvGrainNoiseStrength = 1152,
+    EvGrainNoiseChroma = 1153,
+    EvGrainNoiseIsogr = 1154,
+    EvGrainNoiseStrengr = 1155,
+    EvGrainNoiseScalegr = 1156,
+    EvGrainNoiseDivgr = 1157,
     NUMOFEVENTS
 };
 

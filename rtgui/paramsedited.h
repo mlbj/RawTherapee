@@ -276,6 +276,17 @@ struct ImpulseDenoiseParamsEdited {
     bool thresh;
 };
 
+struct GrainNoiseParamsEdited {
+    bool enabled;
+    bool method;
+    bool strength;
+    bool chroma;
+    bool isogr;
+    bool strengr;
+    bool scalegr;
+    bool divgr;
+};
+
 struct ColorAppearanceParamsEdited {
     bool curve;
     bool curvered;
@@ -1820,6 +1831,7 @@ struct ParamsEdited {
     EPDParamsEdited epd;
     FattalToneMappingParamsEdited fattal;
     ImpulseDenoiseParamsEdited impulseDenoise;
+    GrainNoiseParamsEdited grainNoise;
     SHParamsEdited sh;
     CGParamsEdited cg;
     

@@ -74,6 +74,7 @@ constexpr int SHARPENING       =                                                
 constexpr int IMPULSEDENOISE   =                                                                                                         (M_LUMINANCE|M_COLOR);
 constexpr int DEFRINGE         =                                                                                                         (M_LUMINANCE|M_COLOR);
 constexpr int DIRPYRDENOISE    =                                                                                                         (M_LUMINANCE|M_COLOR);
+constexpr int GRAINNOISE       =                                                                                                         (M_LUMINANCE|M_COLOR);
 constexpr int DIRPYREQUALIZER  =                                                                                                         (M_LUMINANCE|M_COLOR);
 constexpr int GAMMA            =  M_VOID;
 constexpr int CROP             =  M_CROP;
