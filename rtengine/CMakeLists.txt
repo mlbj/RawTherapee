@@ -70,6 +70,7 @@ set(RTENGINESOURCEFILES
     init.cc
     ipdehaze.cc
     ipgrain.cc
+    ipnoisegrain.cc
     iplab2rgb.cc
     iplocallab.cc
     iplabregions.cc

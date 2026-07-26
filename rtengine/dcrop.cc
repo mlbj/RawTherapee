@@ -1414,6 +1414,7 @@ void Crop::update(int todo)
             if ((params.colorappearance.enabled && !settings->autocielab)  || (!cam02)) {
                 parent->ipf.impulsedenoise(labnCrop);
                 parent->ipf.defringe(labnCrop);
+                parent->ipf.noiseGrain(labnCrop, skip);
             }
 
             parent->ipf.MLsharpen(labnCrop);

@@ -299,6 +299,8 @@ enum class BlurType {
     void impulse_nr(LabImage* lab, double thresh);
     void impulse_nrcam(CieImage* ncie, double thresh, float **buffers[3]);
 
+    void noiseGrain(LabImage* lab, int sk);
+
     void dirpyrdenoise(LabImage* src);    //Emil's pyramid denoise
     void dirpyrequalizer(LabImage* lab, int scale);  //Emil's wavelet
 

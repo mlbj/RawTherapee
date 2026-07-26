@@ -1578,6 +1578,7 @@ private:
         if ((params.colorappearance.enabled && !settings->autocielab) || (!cam02)) {
             ipf.impulsedenoise(labView);
             ipf.defringe(labView);
+            ipf.noiseGrain(labView, 1);
         }
 
         if (params.sharpenEdge.enabled) {
