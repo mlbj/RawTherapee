@@ -1193,7 +1193,9 @@ int refreshmap[rtengine::NUMOFEVENTS] = {
     GRAINNOISE, //EvGrainNoiseIsogr
     GRAINNOISE, //EvGrainNoiseStrengr
     GRAINNOISE, //EvGrainNoiseScalegr
-    GRAINNOISE  //EvGrainNoiseDivgr
+    GRAINNOISE, //EvGrainNoiseDivgr
+    GRAINNOISE, //EvGrainNoiseBlurEnabled
+    GRAINNOISE  //EvGrainNoiseBlurRadius
 };
 
 

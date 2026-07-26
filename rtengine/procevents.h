@@ -1185,6 +1185,8 @@ enum ProcEventCode {
     EvGrainNoiseStrengr = 1155,
     EvGrainNoiseScalegr = 1156,
     EvGrainNoiseDivgr = 1157,
+    EvGrainNoiseBlurEnabled = 1158,
+    EvGrainNoiseBlurRadius = 1159,
     NUMOFEVENTS
 };
 

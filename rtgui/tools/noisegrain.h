@@ -29,6 +29,11 @@ class NoiseGrain final :
 {
 
 protected:
+    Gtk::CheckButton* blurEnabled;
+    sigc::connection blurEnabledConn;
+    bool lastBlurEnabled;
+    Adjuster* blurRadius;
+
     MyComboBoxText* method;
     sigc::connection methodConn;
 
@@ -58,6 +63,7 @@ public:
 
     void methodChanged ();
     void chromaChanged ();
+    void blurEnabledChanged ();
 
 private:
     void updateGUIState ();

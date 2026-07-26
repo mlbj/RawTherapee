@@ -509,6 +509,8 @@ void ParamsEdited::set(bool v)
     grainNoise.strengr         = v;
     grainNoise.scalegr         = v;
     grainNoise.divgr           = v;
+    grainNoise.blurEnabled     = v;
+    grainNoise.blurRadius      = v;
     dirpyrDenoise.enabled      = v;
     dirpyrDenoise.enhance      = v;
 //  dirpyrDenoise.perform      = v;
@@ -1298,6 +1300,8 @@ void ParamsEdited::initFrom(const std::vector<rtengine::procparams::ProcParams>&
         grainNoise.strengr = grainNoise.strengr && p.grainNoise.strengr == other.grainNoise.strengr;
         grainNoise.scalegr = grainNoise.scalegr && p.grainNoise.scalegr == other.grainNoise.scalegr;
         grainNoise.divgr = grainNoise.divgr && p.grainNoise.divgr == other.grainNoise.divgr;
+        grainNoise.blurEnabled = grainNoise.blurEnabled && p.grainNoise.blurEnabled == other.grainNoise.blurEnabled;
+        grainNoise.blurRadius = grainNoise.blurRadius && p.grainNoise.blurRadius == other.grainNoise.blurRadius;
 
         dirpyrDenoise.enabled = dirpyrDenoise.enabled && p.dirpyrDenoise.enabled == other.dirpyrDenoise.enabled;
         dirpyrDenoise.enhance = dirpyrDenoise.enhance && p.dirpyrDenoise.enhance == other.dirpyrDenoise.enhance;
@@ -3704,6 +3708,14 @@ void ParamsEdited::combine(rtengine::procparams::ProcParams& toEdit, const rteng
 
     if (grainNoise.divgr) {
         toEdit.grainNoise.divgr = mods.grainNoise.divgr;
+    }
+
+    if (grainNoise.blurEnabled) {
+        toEdit.grainNoise.blurEnabled = mods.grainNoise.blurEnabled;
+    }
+
+    if (grainNoise.blurRadius) {
+        toEdit.grainNoise.blurRadius = mods.grainNoise.blurRadius;
     }
 
     if (dirpyrDenoise.enabled) {

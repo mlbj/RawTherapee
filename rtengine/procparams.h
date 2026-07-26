@@ -455,6 +455,8 @@ struct GrainNoiseParams {
     int strengr;
     int scalegr;
     double divgr;
+    bool blurEnabled;
+    double blurRadius;
 
     GrainNoiseParams();
 

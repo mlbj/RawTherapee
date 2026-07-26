@@ -285,6 +285,8 @@ struct GrainNoiseParamsEdited {
     bool strengr;
     bool scalegr;
     bool divgr;
+    bool blurEnabled;
+    bool blurRadius;
 };
 
 struct ColorAppearanceParamsEdited {

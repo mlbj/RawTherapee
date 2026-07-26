@@ -4135,6 +4135,8 @@ TP_METADATA_STRIP;Strip all metadata
 TP_METADATA_TUNNEL;Copy unchanged
 TP_NEUTRAL;Reset
 TP_NEUTRAL_TOOLTIP;Resets exposure sliders to neutral values.\nApplies to the same controls that Auto Levels applies to, regardless of whether you used Auto Levels or not.
+TP_NOISEGRAIN_BLUR;Enable Blur
+TP_NOISEGRAIN_BLURRADIUS;Radius
 TP_NOISEGRAIN_CHROMA;Add chroma noise
 TP_NOISEGRAIN_DIVGR;Gamma
 TP_NOISEGRAIN_FILMFRAME;Film Grain 1:1

@@ -19,6 +19,7 @@
 #include <random>
 
 #include "color.h"
+#include "gauss.h"
 #include "improcfun.h"
 #include "labimage.h"
 #include "imagefloat.h"
@@ -219,6 +220,27 @@ void addFilmGrain(ImProcFunctions* ipf, LabImage* lab, int isogr, int strengr, i
     }
 }
 
+// A plain, optional soft-focus blur, independent of the noise/grain methods
+// above -- unlike Locallab's "Blur & Noise" section, it can be switched off
+// entirely while still adding grain/noise, or used on its own.
+void applyBlur(LabImage* lab, double radius, int sk, bool multiThread)
+{
+    const double sigma = radius / std::max(sk, 1);
+
+    if (sigma < 0.1) {
+        return;
+    }
+
+#ifdef _OPENMP
+    #pragma omp parallel if (multiThread)
+#endif
+    {
+        gaussianBlur(lab->L, lab->L, lab->W, lab->H, sigma);
+        gaussianBlur(lab->a, lab->a, lab->W, lab->H, sigma);
+        gaussianBlur(lab->b, lab->b, lab->W, lab->H, sigma);
+    }
+}
+
 } // namespace
 
 void ImProcFunctions::noiseGrain(LabImage* lab, int sk)
@@ -227,6 +249,10 @@ void ImProcFunctions::noiseGrain(LabImage* lab, int sk)
 
     if (!grain.enabled || lab->W < 8 || lab->H < 8) {
         return;
+    }
+
+    if (grain.blurEnabled) {
+        applyBlur(lab, grain.blurRadius, sk, multiThread);
     }
 
     if (grain.method == "poisson") {

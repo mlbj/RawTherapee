@@ -1574,7 +1574,9 @@ GrainNoiseParams::GrainNoiseParams() :
     isogr(400),
     strengr(50),
     scalegr(100),
-    divgr(1.5)
+    divgr(1.5),
+    blurEnabled(false),
+    blurRadius(5.0)
 {
 }
 
@@ -1588,7 +1590,9 @@ bool GrainNoiseParams::operator ==(const GrainNoiseParams& other) const
         && isogr == other.isogr
         && strengr == other.strengr
         && scalegr == other.scalegr
-        && divgr == other.divgr;
+        && divgr == other.divgr
+        && blurEnabled == other.blurEnabled
+        && blurRadius == other.blurRadius;
 }
 
 bool GrainNoiseParams::operator !=(const GrainNoiseParams& other) const
@@ -3244,6 +3248,8 @@ int ProcParams::save(const Glib::ustring& fname, const Glib::ustring& fname2, bo
         saveToKeyfile(!pedited || pedited->grainNoise.strengr, "Grain Noise", "Strengr", grainNoise.strengr, keyFile);
         saveToKeyfile(!pedited || pedited->grainNoise.scalegr, "Grain Noise", "Scalegr", grainNoise.scalegr, keyFile);
         saveToKeyfile(!pedited || pedited->grainNoise.divgr, "Grain Noise", "Divgr", grainNoise.divgr, keyFile);
+        saveToKeyfile(!pedited || pedited->grainNoise.blurEnabled, "Grain Noise", "BlurEnabled", grainNoise.blurEnabled, keyFile);
+        saveToKeyfile(!pedited || pedited->grainNoise.blurRadius, "Grain Noise", "BlurRadius", grainNoise.blurRadius, keyFile);
 
 // Defringe
         saveToKeyfile(!pedited || pedited->defringe.enabled, "Defringing", "Enabled", defringe.enabled, keyFile);
@@ -4299,6 +4305,8 @@ int ProcParams::load(const Glib::ustring& fname, ParamsEdited* pedited)
             assignFromKeyfile(keyFile, "Grain Noise", "Strengr", grainNoise.strengr, pedited->grainNoise.strengr);
             assignFromKeyfile(keyFile, "Grain Noise", "Scalegr", grainNoise.scalegr, pedited->grainNoise.scalegr);
             assignFromKeyfile(keyFile, "Grain Noise", "Divgr", grainNoise.divgr, pedited->grainNoise.divgr);
+            assignFromKeyfile(keyFile, "Grain Noise", "BlurEnabled", grainNoise.blurEnabled, pedited->grainNoise.blurEnabled);
+            assignFromKeyfile(keyFile, "Grain Noise", "BlurRadius", grainNoise.blurRadius, pedited->grainNoise.blurRadius);
         }
 
         if (keyFile.has_group("Directional Pyramid Denoising")) { //TODO: No longer an accurate description for FT denoise
