@@ -180,6 +180,23 @@ void addFilmGrain(ImProcFunctions* ipf, LabImage* lab, int isogr, int strengr, i
     const int W = lab->W;
     const int H = lab->H;
 
+    // ipgrain.cc's Gamma response is subtle across the GUI's [0.2, 3.0] range
+    // (it mostly reshapes how grain varies across tones rather than its
+    // overall amount). Stretch it around its 1.5 neutral point so the same
+    // slider produces a more perceptible tonal-response change in this tool,
+    // without touching the shared engine used by Locallab's Film Grain.
+    constexpr float DIVGR_NEUTRAL = 1.5f;
+    constexpr float DIVGR_AMPLIFY = 2.5f;
+    const float divgrEffective = LIM(DIVGR_NEUTRAL + (divgr - DIVGR_NEUTRAL) * DIVGR_AMPLIFY, 0.05f, 8.f);
+
+    // isogr only feeds the noise's spatial frequency ("zoom" in ipgrain.cc),
+    // which only spans about 3.4x across the GUI's [20, 6400] range -- too
+    // narrow to read as anything but a reshuffled pattern. Stretch it
+    // upward from its floor so grain coarseness changes are actually visible.
+    constexpr float ISOGR_FLOOR = 20.f;
+    constexpr float ISOGR_AMPLIFY = 5.f;
+    const int isogrEffective = static_cast<int>(LIM(ISOGR_FLOOR + (static_cast<float>(isogr) - ISOGR_FLOOR) * ISOGR_AMPLIFY, ISOGR_FLOOR, 40000.f));
+
     Imagefloat tmpImage(W, H);
 
     for (int y = 0; y < H; ++y) {
@@ -190,7 +207,7 @@ void addFilmGrain(ImProcFunctions* ipf, LabImage* lab, int isogr, int strengr, i
         }
     }
 
-    ipf->filmGrain(&tmpImage, isogr, strengr, scalegr, divgr, W, H, 0, W, H);
+    ipf->filmGrain(&tmpImage, isogrEffective, strengr, scalegr, divgrEffective, W, H, 0, W, H);
 
     for (int y = 0; y < H; ++y) {
         for (int x = 0; x < W; ++x) {
